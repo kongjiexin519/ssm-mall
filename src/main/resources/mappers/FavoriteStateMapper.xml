@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.ssmmall.model.dao.FavoriteStateMapper">
+  <resultMap id="BaseResultMap" type="com.spring.ssmmall.model.pojo.FavoriteState">
+    <id column="rs_id" jdbcType="BIGINT" property="rsId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="favorite_state" jdbcType="INTEGER" property="favoriteState" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rs_id, product_id, user_id, favorite_state, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_user_favorite_state
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mall_user_favorite_state
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spring.ssmmall.model.pojo.FavoriteState">
+    insert into mall_user_favorite_state (rs_id, product_id, user_id, 
+      favorite_state, create_time)
+    values (#{rsId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{favoriteState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.ssmmall.model.pojo.FavoriteState">
+    insert into mall_user_favorite_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rsId != null">
+        rs_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="favoriteState != null">
+        favorite_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rsId != null">
+        #{rsId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="favoriteState != null">
+        #{favoriteState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.ssmmall.model.pojo.FavoriteState">
+    update mall_user_favorite_state
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="favoriteState != null">
+        favorite_state = #{favoriteState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.ssmmall.model.pojo.FavoriteState">
+    update mall_user_favorite_state
+    set product_id = #{productId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      favorite_state = #{favoriteState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByUserIdAndProductId" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_user_favorite_state
+    where user_id = #{userId} and product_id = #{productId}
+  </select>
+  <select id="listForUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_user_favorite_state
+    where user_id = #{userId} and favorite_state = 2
+    order by create_time desc
+  </select>
+</mapper>

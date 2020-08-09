@@ -1,0 +1,23 @@
+package com.spring.ssmmall.model.dao;
+
+import com.spring.ssmmall.model.pojo.User;
+import org.apache.ibatis.annotations.Param;
+
+public interface UserMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+
+    User selectByName(String username);
+
+    User selectLogin(@Param("userName") String userName, @Param("password") String password);
+
+}

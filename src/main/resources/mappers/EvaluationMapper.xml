@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.ssmmall.model.dao.EvaluationMapper">
+  <resultMap id="BaseResultMap" type="com.spring.ssmmall.model.pojo.Evaluation">
+    <id column="evaluation_id" jdbcType="BIGINT" property="evaluationId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="enjoy" jdbcType="INTEGER" property="enjoy" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="disable_reason" jdbcType="VARCHAR" property="disableReason" />
+    <result column="disable_time" jdbcType="TIMESTAMP" property="disableTime" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    evaluation_id, content, score, create_time, member_id, product_id, enjoy, `state`, 
+    disable_reason, disable_time, order_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_evaluation
+    where evaluation_id = #{evaluationId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mall_evaluation
+    where evaluation_id = #{evaluationId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spring.ssmmall.model.pojo.Evaluation">
+    insert into mall_evaluation (evaluation_id, content, score, 
+      create_time, member_id, product_id, 
+      enjoy, `state`, disable_reason, 
+      disable_time, order_no)
+    values (#{evaluationId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{memberId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{enjoy,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{disableReason,jdbcType=VARCHAR}, 
+      #{disableTime,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.ssmmall.model.pojo.Evaluation">
+    insert into mall_evaluation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
+        evaluation_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="enjoy != null">
+        enjoy,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="disableReason != null">
+        disable_reason,
+      </if>
+      <if test="disableTime != null">
+        disable_time,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluationId != null">
+        #{evaluationId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="enjoy != null">
+        #{enjoy,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="disableReason != null">
+        #{disableReason,jdbcType=VARCHAR},
+      </if>
+      <if test="disableTime != null">
+        #{disableTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.ssmmall.model.pojo.Evaluation">
+    update mall_evaluation
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="enjoy != null">
+        enjoy = #{enjoy,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="disableReason != null">
+        disable_reason = #{disableReason,jdbcType=VARCHAR},
+      </if>
+      <if test="disableTime != null">
+        disable_time = #{disableTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where evaluation_id = #{evaluationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.ssmmall.model.pojo.Evaluation">
+    update mall_evaluation
+    set content = #{content,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      member_id = #{memberId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      enjoy = #{enjoy,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=VARCHAR},
+      disable_reason = #{disableReason,jdbcType=VARCHAR},
+      disable_time = #{disableTime,jdbcType=TIMESTAMP},
+      order_no = #{orderNo,jdbcType=VARCHAR}
+    where evaluation_id = #{evaluationId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByNewUserIdAndProductId" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_evaluation
+    where member_id = #{userId} and product_id = #{productId}
+    order by create_time desc
+    limit 1
+  </select>
+  <select id="selectByUserIdAndProductIdAndOrderNo" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_evaluation
+    where member_id = #{userId} and product_id = #{productId} and order_no = #{orderNo}
+    order by create_time desc
+  </select>
+  <select id="selectByProductId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_evaluation
+    where product_id = #{productId} and state = "enable"
+    order by create_time desc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from mall_evaluation
+    order by create_time desc
+  </select>
+</mapper>
